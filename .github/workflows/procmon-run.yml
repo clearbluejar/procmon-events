@@ -25,9 +25,12 @@ jobs:
 
       - name: install and start procmon
         run: |
-          choco install procmon
-          procmon.exe /AcceptEula /LoadConfig proc_config.pmc /BackingFile capture.pml /Quiet
-
+          choco install procmon          
+          
+      - name: start procmon
+        run: | 
+          Start-job -ArgumentList $(pwd) {$currentDir=$args[0];echo $currentDir; procmon.exe /AcceptEula /LoadConfig $currentDir/proc_config.pmc /BackingFile $currentDir/capture.pml /Quiet }
+          sleep 10
 
       # - name: Start all the services
       #   run: |
@@ -41,13 +44,13 @@ jobs:
       - name: Stop Procmon and output xml
         run: |
           procmon.exe /Terminate
-          procmon.exe /OpenLog capture.pml /SaveAs2 capture.xml
+          procmon.exe /OpenLog capture.pml /SaveAs1 capture.xml
 
       # Upload Artifacts
       - name: Upload procmon xml
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: version-info-json
+          name: procmon-xml
           path: ./*.xml
           retention-days: 5
