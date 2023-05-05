@@ -57,6 +57,7 @@ jobs:
         run: |
           procmon.exe /AcceptEula /OpenLog $(pwd)/${{ matrix.os }}.capture.pml /SaveAs $(pwd)\${{ matrix.os }}.capture.xml
           procmon.exe /AcceptEula /OpenLog ${{ matrix.os }}.capture.pml /SaveAs ${{ matrix.os }}.capture.xml
+          ls
 
       # Upload Artifacts
       - name: Upload procmon xml
