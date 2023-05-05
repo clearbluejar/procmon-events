@@ -28,6 +28,7 @@ jobs:
           choco install procmon  
           
       - name: start procmon
+        shell: PowerShell
         run: | 
           Start-job -ArgumentList $(pwd) {$currentDir=$args[0];echo $currentDir; procmon.exe /AcceptEula /LoadConfig $currentDir/proc_config.pmc /BackingFile $currentDir/capture.pml /Quiet /minimized }
           sleep 10
@@ -47,7 +48,7 @@ jobs:
         run: |
           ls
           procmon.exe /AcceptEula /Terminate
-          procmon.exe /OpenLog capture.pml /SaveAs1 capture.xml
+          procmon.exe /OpenLog $(pwd)/capture.pml /SaveAs1 $(pwd)/capture.xml
           ls          
 
       # Upload Artifacts
