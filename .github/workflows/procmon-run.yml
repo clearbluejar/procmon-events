@@ -45,12 +45,9 @@ jobs:
       - name: Stop Procmon and output xml
         run: |
           ls
-          procmon.exe /Terminate
+          procmon.exe /AcceptEula /Terminate
           procmon.exe /OpenLog capture.pml /SaveAs1 capture.xml
-          ls
-          procmon.exe /Terminate
-          procmon.exe /OpenLog capture.pml /SaveAs1 capture.xml
-          
+          ls          
 
       # Upload Artifacts
       - name: Upload procmon xml
