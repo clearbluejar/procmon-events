@@ -1,4 +1,4 @@
-name: Test Run 200 - Generate Version Info
+name: procmon capture to xml
 
 on:
   workflow_dispatch:
@@ -43,21 +43,17 @@ jobs:
       #     Get-Service -ErrorAction SilentlyContinue | % { start-job -name $_.Name -ArgumentList @($_, $skip) -ScriptBlock { $service=$args[0];$skip=$args[1]; echo $service.Name; if ($skip.Contains($service.Name)) { continue }; Start-Service $service -ErrorAction SilentlyContinue} }   
       #     Get-Job
 
-      - name: Stop Procmon and output xml
+      - name: Stop Procmon
         shell: PowerShell
         run: |
           ls
           procmon.exe /AcceptEula /Terminate
-          procmon.exe /AcceptEula /OpenLog $(pwd)\${{ matrix.os }}.capture.pml /SaveAs1 $(pwd)\${{ matrix.os }}.capture1.xml
-          procmon.exe /AcceptEula /OpenLog $(pwd)\${{ matrix.os }}.capture.pml /SaveAs $(pwd)\${{ matrix.os }}.capture.xml
-          procmon.exe /AcceptEula /OpenLog $(pwd)/ERRORcapture.pml /SaveAs1 $(pwd)/${{ matrix.os }}.capture.xml
           ls 
 
       - name: convert to xml
-        shell: cmd
         run: |
-          procmon.exe /AcceptEula /OpenLog $(pwd)/${{ matrix.os }}.capture.pml /SaveAs $(pwd)\${{ matrix.os }}.capture.xml
-          procmon.exe /AcceptEula /OpenLog ${{ matrix.os }}.capture.pml /SaveAs ${{ matrix.os }}.capture.xml
+          ls
+          procmon.exe /AcceptEula /OpenLog ${{ matrix.os }}.capture.pml /SaveAs ${{ matrix.os }}.capture.xml          
           ls
 
       # Upload Artifacts
