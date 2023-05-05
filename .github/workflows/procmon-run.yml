@@ -36,7 +36,7 @@ jobs:
 
       - name: dump procmon config          
         run: |
-          python dump_procmon_config.py $env:${{ env.proc_config}}
+          python dump_procmon_config.py ${{env.proc_config}}
 
       - name: start procmon
         shell: PowerShell
