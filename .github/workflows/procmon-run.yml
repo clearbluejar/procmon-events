@@ -48,7 +48,8 @@ jobs:
         run: |
           ls
           procmon.exe /AcceptEula /Terminate
-          procmon.exe /OpenLog $(pwd)/capture.pml /SaveAs1 $(pwd)/capture.xml
+          procmon.exe /AcceptEula /OpenLog $(pwd)/capture.pml /SaveAs1 $(pwd)/capture.xml
+          procmon.exe /AcceptEula /OpenLog $(pwd)/ERRORcapture.pml /SaveAs1 $(pwd)/capture.xml
           ls          
 
       # Upload Artifacts
