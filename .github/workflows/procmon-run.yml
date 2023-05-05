@@ -54,6 +54,7 @@ jobs:
           ls 
 
       - name: convert to xml
+        shell: cmd
         run: |
           procmon.exe /AcceptEula /OpenLog $(pwd)/${{ matrix.os }}.capture.pml /SaveAs $(pwd)\${{ matrix.os }}.capture.xml
           procmon.exe /AcceptEula /OpenLog ${{ matrix.os }}.capture.pml /SaveAs ${{ matrix.os }}.capture.xml
