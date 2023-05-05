@@ -25,12 +25,13 @@ jobs:
 
       - name: install and start procmon
         run: |
-          choco install procmon          
+          choco install procmon  
           
       - name: start procmon
         run: | 
           Start-job -ArgumentList $(pwd) {$currentDir=$args[0];echo $currentDir; procmon.exe /AcceptEula /LoadConfig $currentDir/proc_config.pmc /BackingFile $currentDir/capture.pml /Quiet }
           sleep 10
+          Receive-Job *          
 
       # - name: Start all the services
       #   run: |
@@ -43,6 +44,7 @@ jobs:
 
       - name: Stop Procmon and output xml
         run: |
+          ls
           procmon.exe /Terminate
           procmon.exe /OpenLog capture.pml /SaveAs1 capture.xml
 
