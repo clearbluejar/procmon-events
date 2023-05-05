@@ -47,6 +47,10 @@ jobs:
           ls
           procmon.exe /Terminate
           procmon.exe /OpenLog capture.pml /SaveAs1 capture.xml
+          ls
+          procmon.exe /Terminate
+          procmon.exe /OpenLog capture.pml /SaveAs1 capture.xml
+          
 
       # Upload Artifacts
       - name: Upload procmon xml
