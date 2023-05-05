@@ -47,13 +47,14 @@ jobs:
         shell: PowerShell
         run: |
           ls
-          procmon.exe /AcceptEula /Terminate
+          procmon.exe /AcceptEula /Terminate | Out-Null
+          sleep 10
           ls 
 
       - name: convert to xml
         run: |
           ls
-          procmon.exe /AcceptEula /OpenLog ${{ matrix.os }}.capture.pml /SaveAs ${{ matrix.os }}.capture.xml          
+          procmon.exe /AcceptEula /OpenLog ${{ matrix.os }}.capture.pml /SaveAs ${{ matrix.os }}.capture.xml  | Out-Null      
           ls
 
       # Upload Artifacts
