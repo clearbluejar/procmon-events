@@ -36,12 +36,12 @@ jobs:
 
       - name: dump procmon config          
         run: |
-          python dump_procmon_config.py ${{env.proc_config}}
+          python dump_procmon_config.py $env:procmon_config
 
       - name: start procmon
         shell: PowerShell
         run: | 
-          Start-job -ArgumentList $(pwd) {$currentDir=$args[0];echo $currentDir; procmon.exe /AcceptEula /LoadConfig $currentDir/proc_config.pmc /BackingFile $currentDir/${{ matrix.os }}.capture.pml /Quiet /minimized }
+          Start-job -ArgumentList $(pwd) {$currentDir=$args[0];echo $currentDir; procmon.exe /AcceptEula /LoadConfig $currentDir/$env:procmon_config /BackingFile $currentDir/${{ matrix.os }}.capture.pml /Quiet /minimized }
           sleep 10
           Receive-Job *          
 
