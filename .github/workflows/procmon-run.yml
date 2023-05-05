@@ -48,14 +48,15 @@ jobs:
         run: |
           ls
           procmon.exe /AcceptEula /Terminate
-          procmon.exe /AcceptEula /OpenLog $(pwd)/${{ matrix.os }}.capture.pml /SaveAs1 $(pwd)/${{ matrix.os }}.capture1.xml
-          procmon.exe /AcceptEula /OpenLog $(pwd)/${{ matrix.os }}.capture.pml /SaveAs $(pwd)/${{ matrix.os }}.capture.xml
+          procmon.exe /AcceptEula /OpenLog $(pwd)\${{ matrix.os }}.capture.pml /SaveAs1 $(pwd)\${{ matrix.os }}.capture1.xml
+          procmon.exe /AcceptEula /OpenLog $(pwd)\${{ matrix.os }}.capture.pml /SaveAs $(pwd)\${{ matrix.os }}.capture.xml
           procmon.exe /AcceptEula /OpenLog $(pwd)/ERRORcapture.pml /SaveAs1 $(pwd)/${{ matrix.os }}.capture.xml
           ls 
-          
+
       - name: convert to xml
         run: |
-          procmon.exe /AcceptEula /OpenLog $(pwd)/${{ matrix.os }}.capture.pml /SaveAs $(pwd)/${{ matrix.os }}.capture.xml
+          procmon.exe /AcceptEula /OpenLog $(pwd)/${{ matrix.os }}.capture.pml /SaveAs $(pwd)\${{ matrix.os }}.capture.xml
+          procmon.exe /AcceptEula /OpenLog ${{ matrix.os }}.capture.pml /SaveAs ${{ matrix.os }}.capture.xml
 
       # Upload Artifacts
       - name: Upload procmon xml
