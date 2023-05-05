@@ -23,7 +23,7 @@ jobs:
       - run: Set-MpPreference -DisableRealtimeMonitoring $true
         shell: powershell
 
-        - name: install and start procmon
+      - name: install and start procmon
         run: |
           choco install procmon
           procmon.exe /AcceptEula /LoadConfig proc_config.pmc /BackingFile capture.pml /Quiet
