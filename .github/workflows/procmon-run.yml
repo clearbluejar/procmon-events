@@ -28,8 +28,9 @@ jobs:
           choco install procmon  
           
       - name: start procmon
+        shell: PowerShell
         run: | 
-          Start-job -ArgumentList $(pwd) {$currentDir=$args[0];echo $currentDir; procmon.exe /AcceptEula /LoadConfig $currentDir/proc_config.pmc /BackingFile $currentDir/capture.pml /Quiet }
+          Start-job -ArgumentList $(pwd) {$currentDir=$args[0];echo $currentDir; procmon.exe /AcceptEula /LoadConfig $currentDir/proc_config.pmc /BackingFile $currentDir/capture.pml /Quiet /minimized }
           sleep 10
           Receive-Job *          
 
@@ -43,6 +44,7 @@ jobs:
       #     Get-Job
 
       - name: Stop Procmon and output xml
+        shell: PowerShell
         run: |
           ls
           procmon.exe /AcceptEula /Terminate
