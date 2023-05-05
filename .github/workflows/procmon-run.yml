@@ -57,6 +57,8 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: procmon-xml
-          path: ./*.xml
+          name: procmon-files
+          path: |
+            ./*.xml
+            ./*.pml
           retention-days: 5
