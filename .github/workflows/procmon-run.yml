@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+env:
+  procmon_config: proc_config.pmc
+
 jobs:
   generate_versioninfo:
     strategy:
@@ -25,8 +28,16 @@ jobs:
 
       - name: install and start procmon
         run: |
-          choco install procmon  
-          
+          choco install procmon
+
+      - name: pip install requirements
+        run: |
+          pip install -r requirements.txt
+
+      - name: dump procmon config          
+        run: |
+          python dump_procmon_config.py $env:${{ env.proc_config}}
+
       - name: start procmon
         shell: PowerShell
         run: | 
@@ -53,9 +64,8 @@ jobs:
 
       - name: convert to xml
         run: |
-          ls
           procmon.exe /AcceptEula /OpenLog ${{ matrix.os }}.capture.pml /SaveAs ${{ matrix.os }}.capture.xml  | Out-Null      
-          ls
+
 
       # Upload Artifacts
       - name: Upload procmon xml
