@@ -9,7 +9,7 @@ env:
   procmon_config: proc_config.pmc
 
 jobs:
-  generate_versioninfo:
+  generate_procmon_data:
     strategy:
       matrix:
         os: [windows-2019, windows-2022]
